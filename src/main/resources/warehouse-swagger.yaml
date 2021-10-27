@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Warehouse API
+  description: Warehouse API by Preeti
+  contact:
+    name: Preeti
+  version: 1.0.0
+servers: 
+  - url: http://localhost:8080
+paths:
+  /warehouse:
+    get:
+      summary: Retrieve all vegetables.
+      operationId: getVegetables
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vegetable'
+  /vegetableDetails:
+    get:
+      summary: Retrieve vegetable name and price
+      operationId: getVegeNameAndPrice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vegetable'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    vegetable:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Okra
+        Price:
+          type: number
+          example: 15
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+      
